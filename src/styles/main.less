@@ -1,0 +1,38 @@
+@import "vars";
+.ant-card { 
+    // border:1px solid #141414!important;
+    .ant-card-meta-title {
+        color: @text-color
+    } 
+    .ant-card-meta-description {
+        color: @text-color
+    }
+}
+
+.ant-picker.ant-picker-range.date-picker {
+    border:none;
+    input {
+        border:none;
+    }
+}
+
+.react-grid-layout {
+    .react-grid-item {
+        .react-resizable-handle::after{
+            border-right: 2px solid #555;
+            border-bottom: 2px solid #555;
+        }
+    }
+}
+
+.ant-input:focus, .ant-input-focused {
+    box-shadow: none;
+}
+
+.ant-menu .ant-menu-submenu-selected {
+    color: @primary-color
+}
+
+.ant-menu .ant-menu-item-selected  .anticon{
+    color: @primary-color
+}
