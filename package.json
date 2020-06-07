@@ -126,7 +126,7 @@
     "tween-functions": "^1.2.0",
     "typescript": "3.5.3",
     "u-basscss": "2.0.0",
-    "jquery": "3.4.1",
+    "jquery": "3.5.0",
     "react-custom-scrollbars": "4.2.1",
     "react-virtualized-auto-sizer": "1.0.2"
   },
