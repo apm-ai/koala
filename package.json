@@ -1,7 +1,7 @@
 {
   "private": true,
-  "name": "apm-ui",
-  "version": "1.9.0",
+  "name": "datav",
+  "version": "0.0.1",
   "main": "src/index.js",
   "license": "Apache-2.0",
   "homepage": ".",
