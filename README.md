@@ -12,7 +12,7 @@ DataV allows you to query, visualize, alert on and understand your metrics no ma
 - **Mixed Data Sources:** Mix different data sources in the same graph! You can specify a data source on a per-query basis. This works for even custom datasources.
 
 ## Compare to Grafana
----
+
 1. 100% Reactjs and Typescript, no angular
 2. Reduce the amount of code by 50%
 3. Better code design
