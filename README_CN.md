@@ -11,7 +11,7 @@ DataV是一个类似Grafana的数据查询、展示、告警平台，支持Metri
 - **类似Grafana** Grafana是目前业界做得最好的，但是它也存在一些不足，详情见下面的对比
 
 ## 与Grafana对比
----
+
 1. 全部用React、Typescript和Go实现，不存在任何的Angular代码
 2. 代码量大幅精简，大概是grafana的50%以内
 3. 更好的代码设计，更简单的插件开发
