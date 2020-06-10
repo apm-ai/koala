@@ -1,0 +1,29 @@
+{
+  "compileOnSave": true,
+  "compilerOptions": {
+    "target": "es2016",
+    "lib": [
+      "es2017",
+      "dom",
+      "dom.iterable"
+    ],
+    "baseUrl": ".",
+    "allowJs": true,
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "strict": false,
+    "forceConsistentCasingInFileNames": true,
+    "module": "esnext",
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "noEmit": true,
+    "jsx": "react",
+    "experimentalDecorators": true,
+    "isolatedModules": true
+  },
+  "include": [
+    "src",
+    "typings"
+  ]
+}
