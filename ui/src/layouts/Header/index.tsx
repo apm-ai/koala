@@ -26,8 +26,8 @@ function HeaderWrapper(props: Props) {
     }
 
     return (
-        <Header className="site-layout-background" style={{ height: '46px', lineHeight: '46px', padding: '0 20px' ,position: 'fixed', zIndex: 1, width: 'calc(100% - 83px)'}} >
-            <div className='header'>
+        <Header className="datav-header">
+            <div className='datav-header-inner'>
                 <div>
                     <BreadcrumbWrapper />
                 </div>

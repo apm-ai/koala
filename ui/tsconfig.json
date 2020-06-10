@@ -1,18 +1,16 @@
 {
   "compileOnSave": true,
   "compilerOptions": {
-    "target": "es2016",
+    "target": "es5",
     "lib": [
-      "es2017",
-      "dom",
-      "dom.iterable"
+      "es2019",
+      "dom"
     ],
     "baseUrl": ".",
     "allowJs": true,
     "skipLibCheck": true,
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
-    "strict": false,
     "forceConsistentCasingInFileNames": true,
     "module": "esnext",
     "moduleResolution": "node",
@@ -20,7 +18,11 @@
     "noEmit": true,
     "jsx": "react",
     "experimentalDecorators": true,
-    "isolatedModules": true
+    "isolatedModules": true,
+    "noImplicitAny": false,
+    "noImplicitReturns": true,
+    "noImplicitThis": true,
+    "strict": false
   },
   "include": [
     "src",

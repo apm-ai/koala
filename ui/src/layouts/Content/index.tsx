@@ -3,6 +3,7 @@ import { Layout, BackTop } from 'antd'
 import { Route } from 'react-router-dom'
 import { isEmpty } from 'src/library/utils/validate'
 
+import './index.less'
 const { Content } = Layout
 
 function ContentWrapper(porps:any){
@@ -29,7 +30,7 @@ function ContentWrapper(porps:any){
     }, [routers])
     return(
         <>
-            <Content  style={{ padding: '6px 20px' ,marginTop: 44 }}>
+            <Content className="datav-content">
                 <Suspense fallback={<div />}>
                     {
                         routeItem.map((route, i) => {
@@ -38,8 +39,6 @@ function ContentWrapper(porps:any){
                             )
                         })
                     }
-                    {/* other url path redirect to home */}
-                    {/* <Redirect to="/dashboard" /> */}
                 </Suspense>
                 <BackTop />
             </Content>

@@ -15,8 +15,6 @@
 
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { document } from 'global';
-
 import { Provider as ReduxProvider} from 'react-redux';
 // eslint-disable-next-line import/order, import/no-unresolved
 import UIApp from './pages/App';

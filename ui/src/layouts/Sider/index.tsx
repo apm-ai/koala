@@ -25,19 +25,13 @@ const SiderWrapper =  props => {
         scriptUrl: '//at.alicdn.com/t/font_1402269_m6v7u5uwb2.js',
     });
     return (
-        <Sider collapsed={true} className="sider" style={{
-            overflow: 'auto',
-            height: '100vh',
-            position: 'fixed',
-            left: 0,
-        }}>
+        <Sider collapsed={true} className="datav-sider">
             <div>
-                <div className="logo" />
+                <div className="datav-logo" />
                 <Menu
                     mode='vertical'
                     selectedKeys={[location.pathname]}
                     forceSubMenuRender={true}
-                    className="sider-menu"
                     theme="dark"
                 >
                     {
@@ -82,7 +76,7 @@ const SiderWrapper =  props => {
                         })
                     }
 
-                    <Menu.Item key="set-locale1" style={{ position: 'absolute', bottom: '95px', right: '32px' }}>
+                    <Menu.Item key="set-locale1" style={{ position: 'absolute', bottom: '95px', right: '35px' }}>
                         {
                             theme === 'light' ?
                                 <MyIcon type="icon-moon" onClick={() => {
@@ -95,13 +89,13 @@ const SiderWrapper =  props => {
 
                         <span><Message id='changeTheme' /></span>
                     </Menu.Item>
-                    <Menu.Item key="set-locale" style={{ position: 'absolute', bottom: '55px', right: '32px', fontSize: '16px' }}>
+                    <Menu.Item key="set-locale" style={{ position: 'absolute', bottom: '55px', right: '35px', fontSize: '16px' }}>
                         <GlobalOutlined onClick={() => { 
                             store.dispatch(updateLocale()) 
                             }} />
                         <span><Message id='languages' /></span>
                     </Menu.Item>
-                    <SubMenu key="user-setting" icon={<UserOutlined />} style={{ position: 'absolute', bottom: '20px', right: '0px', fontSize: '16px' }}>
+                    <SubMenu key="user-setting" icon={<UserOutlined />} style={{ position: 'absolute', bottom: '20px', right: '-6px', fontSize: '16px' }}>
                         <Menu.Item key="logout" onClick={logout}>Logout</Menu.Item>
                     </SubMenu>
                 </Menu>

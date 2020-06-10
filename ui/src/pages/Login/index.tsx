@@ -47,8 +47,8 @@ function Login() {
     };
 
     return (
-        <div className="login">
-        <div className="rectangle">
+        <div className="datav-login">
+        <div className="datav-rectangle">
         <Form
             {...layout}
             name="basic"

@@ -21,9 +21,9 @@ const Index = () => {
   })
 
   return (
-    <Layout className="layouts" style={{ minHeight: '100vh' }}>
+    <Layout className="datav-layouts">
         <SiderWrapper routers={Routers} />
-      <Layout style={{ marginLeft: 83 }}>
+      <Layout className="datav-layout">
         <HeaderWrapper />
         <ContentWrapper routers={Routers} />
       </Layout>
