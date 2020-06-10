@@ -1,15 +1,15 @@
-import moment from 'moment'
 import { createAction } from '@reduxjs/toolkit';
 
 import { ApplicationState } from 'src/types/application'; 
 
 import storage from 'src/library/utils/localStorage'
+import {defaultConfig} from 'src/packages/datav-core'
 
 export const initialState: ApplicationState = {
-  startDate: storage.get('app.startDate') || moment().subtract(1, 'h'),
-  endDate: storage.get('app.endDate') || moment(),
-  locale : storage.get('app.locale') || 'en_US',
-  theme: storage.get('app.theme') || 'dark'
+  startDate: storage.get('app.startDate') || defaultConfig.application.startDate(),
+  endDate: storage.get('app.endDate') || defaultConfig.application.endDate(),
+  locale : storage.get('app.locale') || defaultConfig.application.locale,
+  theme: storage.get('app.theme') || defaultConfig.application.theme
 }; 
 
 

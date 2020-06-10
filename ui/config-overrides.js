@@ -55,14 +55,6 @@ module.exports = override(
     javascriptEnabled: true,
   }),
   addWebpackAlias({
-    '@': path.resolve(__dirname, 'src'),
-    '@library': path.resolve(__dirname, 'src/library'),
-    '@layouts': path.resolve(__dirname, 'src/layouts'),
-    '@utils': path.resolve(__dirname, 'src/library/utils'),
-    '@pages': path.resolve(__dirname, 'src/pages'),
-    '@store': path.resolve(__dirname, 'src/store'),
-    '@styles': path.resolve(__dirname, 'src/styles'),
-    '@components': path.resolve(__dirname, 'src/components'),
-    '@types': path.resolve(__dirname, 'src/types'),
+    '@packages': path.resolve(__dirname, 'packages'),
   })
 )

@@ -4,15 +4,17 @@ import { UserState } from 'src/types/user';
 
 import storage from 'src/library/utils/localStorage'
 
-const initUser = storage.get("user")
-export const initialState: UserState = initUser ? initUser :
+import {defaultConfig} from 'src/packages/datav-core'
+
+const cachedUser = storage.get("user")
+export const initialState: UserState = cachedUser ? cachedUser :
   {
     id: null,
     name: null,
     email: null,
     priv: null,
     mobile: null,
-    avatarUrl: null
+    avatarUrl: defaultConfig.user.avatarUrl
   };
 
 export const updateUser = createAction<UserState>('user/update');

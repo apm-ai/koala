@@ -1,0 +1,23 @@
+{
+  "author": "APM & AI",
+  "license": "Apache-2.0",
+  "name": "@datav/core",
+  "version": "0.0.1",
+  "description": "DataV Core Library",
+  "keywords": [
+    "datav",
+    "typescript"
+  ],
+  "main": "src/index.ts",
+  "scripts": {
+  },
+  "dependencies": {
+    "moment": "^2.18.1"
+  },
+  "devDependencies": {
+    "pretty-format": "25.1.0",
+    "typescript": "3.7.5",
+    "@types/moment": "^2.13.0"
+  },
+  "types": "src/index.ts"
+}

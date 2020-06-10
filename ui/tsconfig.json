@@ -19,9 +19,6 @@
     "jsx": "react",
     "experimentalDecorators": true,
     "isolatedModules": true,
-    "noImplicitAny": false,
-    "noImplicitReturns": true,
-    "noImplicitThis": true,
     "strict": false
   },
   "include": [
