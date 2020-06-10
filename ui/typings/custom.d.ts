@@ -18,6 +18,7 @@ declare const global: {
 }
 
 declare interface Window {
+  less: any;
   // For setting the site-prefix
   __webpack_public_path__: string; // eslint-disable-line camelcase
   // For getting ui config

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { useLocation, Link } from 'react-router-dom'
 import { Menu, Layout } from 'antd'
 import { connect } from 'react-redux';
@@ -36,7 +36,7 @@ const SiderWrapper =  props => {
                 <Menu
                     mode='vertical'
                     selectedKeys={[location.pathname]}
-                    forceSubMenuRender="true"
+                    forceSubMenuRender={true}
                     className="sider-menu"
                     theme="dark"
                 >

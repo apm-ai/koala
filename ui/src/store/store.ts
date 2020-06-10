@@ -1,4 +1,4 @@
-import { StoreState } from '../types'; 
+import { StoreState } from 'src/types'; 
 import { Store } from 'redux'; 
  
 export let store: Store<StoreState>;

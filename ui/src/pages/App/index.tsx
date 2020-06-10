@@ -21,7 +21,7 @@ import Login from '../Login'
 
 import './index.css';
 
-import Layouts from 'src/layouts/index.jsx'
+import Layouts from 'src/layouts/index'
 
 
 import Intl from 'src/components/Intl'
@@ -29,13 +29,18 @@ import ConfigProvider from 'src/components/ConfigProvider'
 
 import darkVars from 'src/styles/dark.json';
 import lightVars from 'src/styles/light.json';
+import {StoreState} from 'src/types'  
 
-const UIApp = (props) => {
+interface Props {
+  theme: string
+}
+
+const UIApp = (props:Props) => {
   const { theme } = props
   useEffect(() => {
     let vars = theme === "light" ? lightVars : darkVars;
-    vars = { ...vars, '@white': '#fff', '@black': '#000' };
-    window.less.modifyVars(vars)
+    const newVars = { ...vars , "a": "b"}
+    window.less.modifyVars(newVars)
   }, [theme])
 
   return (
@@ -53,7 +58,7 @@ const UIApp = (props) => {
   );
 }
 
-export const mapStateToProps = (state) => ({
+export const mapStateToProps = (state:StoreState) => ({
   theme: state.application.theme
 });
 

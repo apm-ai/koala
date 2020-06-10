@@ -42,7 +42,7 @@ import './index.css';
 
 import * as serviceWorker from './serviceWorker';
 
-import { configureStore } from 'src/store/configureStore'
+import { configureStore } from 'src/store/configureStore' 
 const store = configureStore();
   ReactDOM.render(
     <ReduxProvider store={store}>

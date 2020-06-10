@@ -20,7 +20,7 @@ import { XYPlot, XAxis, YAxis, MarkSeries, Hint } from 'react-vis';
 import { compose, withState, withProps } from 'recompose';
 
 // eslint-disable-next-line import/order, import/no-unresolved
-import { ONE_MILLISECOND, formatDuration } from '../../../library/utils/date';
+import { ONE_MILLISECOND, formatDuration } from 'src/library/utils/date';
  
 import './react-vis.css'; 
 import './ScatterPlot.css';

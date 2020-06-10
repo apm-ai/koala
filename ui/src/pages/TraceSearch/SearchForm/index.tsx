@@ -28,7 +28,7 @@ function SearchForm(props: {setTraces:any}) {
             style={{ padding: '10px' }}
             size="small"
             initialValues={{
-                ['resultsLimit']: 20,
+                'resultsLimit': 20,
             }}
         >
             <Form.Item

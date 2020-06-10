@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useHistory } from 'react-router-dom'
 import './index.less';
 import { Col, Row, Tabs, Select } from 'antd';
@@ -7,7 +7,7 @@ import SearchForm from './SearchForm'
 import ScatterPlot from './ScatterPlot/ScatterPlot';
 import { testTraces } from './SearchForm/testData.js'
 import ResultItem from './ResultItem'
-import { getPercentageOfDuration } from '../../library/utils/date';
+import { getPercentageOfDuration } from 'src/library/utils/date';
 
 const TabPane = Tabs.TabPane;
 const { Option } = Select;

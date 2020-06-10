@@ -1,4 +1,4 @@
-import React,{FC,ReactNode} from 'react'
+import React,{ReactNode} from 'react'
 
 import { IntlProvider } from 'react-intl' /* react-intl imports */
 import { connect } from 'react-redux';

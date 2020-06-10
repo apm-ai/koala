@@ -1,4 +1,4 @@
-let adminKey = 'admin-'
+let adminKey = 'datav.'
 const storage = {
     set(key:string, value:any){
         localStorage.setItem(adminKey+key, JSON.stringify(value))

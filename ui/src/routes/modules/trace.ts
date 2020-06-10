@@ -1,7 +1,7 @@
 import React from 'react'
 import {SearchOutlined} from '@ant-design/icons';
   
-const TraceSearch = React.lazy(() => import('../../pages/TraceSearch'))
+const TraceSearch = React.lazy(() => import('src/pages/TraceSearch'))
 // const TracePage = React.lazy(() => import('../../pages/TracePage'))
   
 const Trace = [

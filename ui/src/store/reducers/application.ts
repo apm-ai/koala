@@ -1,15 +1,15 @@
 import moment from 'moment'
 import { createAction } from '@reduxjs/toolkit';
 
-import { ApplicationState } from '../../types/application'; 
+import { ApplicationState } from 'src/types/application'; 
 
 import storage from 'src/library/utils/localStorage'
 
 export const initialState: ApplicationState = {
-  startDate: storage.get('apm-start-date') || moment().subtract(1, 'h'),
-  endDate: storage.get('apm-end-date') || moment(),
-  locale : storage.get('apm-locale') || 'en_US',
-  theme: storage.get('apm-theme') || 'dark'
+  startDate: storage.get('app.startDate') || moment().subtract(1, 'h'),
+  endDate: storage.get('app.endDate') || moment(),
+  locale : storage.get('app.locale') || 'en_US',
+  theme: storage.get('app.theme') || 'dark'
 }; 
 
 
@@ -21,22 +21,22 @@ export const updateEndDate = createAction<any>('application/endDate');
 export const applicationReducer = (state = initialState, action: any) => {
   if (updateLocale.match(action)) {
     const locale = state.locale==='en_US'?'zh_CN':'en_US'
-    storage.set('apm-locale', locale)
+    storage.set('app.locale', locale)
     return {...state, locale}
   } 
   
   if (updateTheme.match(action)) {
-    storage.set('apm-theme',action.payload)
+    storage.set('app.theme',action.payload)
     return {...state,theme: action.payload}
   }
 
   if (updateStartDate.match(action)) {
-    storage.set('apm-start-date',action.payload)
+    storage.set('app.startDate',action.payload)
     return {...state,startDate: action.payload}
   }
 
   if (updateEndDate.match(action)) {
-    storage.set('apm-end-date',action.payload)
+    storage.set('app.endDate',action.payload)
     return {...state,endDate: action.payload}
   }
 

@@ -5,13 +5,13 @@ import { isEmpty } from 'src/library/utils/validate'
 
 const { Content } = Layout
 
-function ContentWrapper(porps){
+function ContentWrapper(porps:any){
     const { routers } = porps
     const [routeItem, setRouteItem] = useState([])
     
     useEffect( () => {
-        const item = []
-        routers.map(route => {
+        const item= []
+        routers.map((route:any) => {
             if(!isEmpty(route.children)){
                 route.children.map(r => {
                     item.push(r)

@@ -11,21 +11,18 @@ import request from 'src/library/utils/http'
 import { isEmpty } from 'src/library/utils/validate'
 import { setToken } from 'src/library/utils/auth';
 
-import { connect } from 'react-redux';
-import {StoreState} from 'src/types'  
 import { store } from 'src/store/store';
 import { updateUser } from 'src/store/reducers/user';
 
 
-function Login(props) {
-    const {user} = props
+function Login() {
     const layout = {
         wrapperCol: { span: 20,offset:2 },
     };
     
     const history = useHistory()
 
-    const onFinish = values => {
+    const onFinish = (values:any) => {
         request({
             url: '/web/login',
             method: 'POST',
@@ -49,10 +46,6 @@ function Login(props) {
        
     };
 
-    const onFinishFailed = () => {
-        // console.log('Failed:', errorInfo);
-    };
-
     return (
         <div className="login">
         <div className="rectangle">
@@ -61,7 +54,6 @@ function Login(props) {
             name="basic"
             initialValues={{ remember: true }}
             onFinish={onFinish}
-            onFinishFailed={onFinishFailed}
         >
             <Form.Item
                 name="userid"
@@ -70,7 +62,6 @@ function Login(props) {
             </Form.Item>
 
             <Form.Item
-                // label="Password"
                 name="password"
             >
                 <Input   prefix={<LockOutlined className="site-form-item-icon" />} type="password" placeholder="Password" />
@@ -89,8 +80,6 @@ function Login(props) {
 }
 
 
-export const mapStateToProps = (state) => ({
-    user: state.user    
-});
 
-export default connect(mapStateToProps)(Login);
+
+export default Login;

@@ -1,7 +1,7 @@
 import { configureStore as reduxConfigureStore, getDefaultMiddleware } from '@reduxjs/toolkit';
 import { ThunkMiddleware } from 'redux-thunk';
 import { setStore } from './store';
-import { StoreState } from '..//types/store';
+import { StoreState } from 'src/types/store';
 import {  createRootReducer } from './reducers/root';
 
  
