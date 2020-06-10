@@ -19,10 +19,6 @@ declare const global: {
 
 declare interface Window {
   less: any;
-  // For setting the site-prefix
-  __webpack_public_path__: string; // eslint-disable-line camelcase
-  // For getting ui config
-  getJaegerUiConfig?: () => Record<string, any>;
 }
 
 // For inlined envvars
@@ -40,13 +36,4 @@ declare module 'combokeys' {
     bind: (binding: string | string[], handler: CombokeysHandler) => void;
     reset: () => void;
   }
-}
-
-declare module 'react-helmet';
-declare module 'json-markup';
-declare module 'react-vis-force';
-declare module 'tween-functions';
-
-declare module "viz.js/viz.js" {
-  export default function viz(dot: string, options?: {}): string;
 }
