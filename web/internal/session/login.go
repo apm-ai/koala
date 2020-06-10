@@ -20,16 +20,17 @@ func Login(c echo.Context) error {
 
 	// 检查信息是否正确
 	var pw, priv, name, mobile, email, avatarUrl string
-	q := utils.StaticCQL.Query(`select password,priv,name,mobile,email,avatar_url FROM users WHERE id=?`, userid)
-	err := q.Scan(&pw, &priv, &name, &mobile, &email, &avatarUrl)
+	row := utils.DB.QueryRow(`select password,priv,name,mobile,email,avatar_url FROM users WHERE id=?`, userid)
+	err := row.Scan(&pw, &priv, &name, &mobile, &email, &avatarUrl)
 	if err != nil {
-		g.L.Info("access database error", zap.Error(err), zap.String("query", q.String()))
+		g.L.Info("access database error", zap.Error(err))
 		return c.JSON(http.StatusOK, g.Result{
 			Status:  http.StatusInternalServerError,
 			ErrCode: g.DatabaseC,
 			Message: g.DatabaseE,
 		})
 	}
+
 	if pw == "" || pw != password {
 		return c.JSON(http.StatusOK, g.Result{
 			Status:  http.StatusUnauthorized,
@@ -72,10 +73,9 @@ func Login(c echo.Context) error {
 	}
 
 	// 更新数据库中的user表
-	q1 := utils.StaticCQL.Query(`UPDATE users SET last_login_date=? WHERE id=?`, gutils.Time2StringSecond(time.Now()), session.User.ID)
-	err = q1.Exec()
+	_, err = utils.DB.Exec(`UPDATE users SET last_login_date=? WHERE id=?`, gutils.Time2StringSecond(time.Now()), session.User.ID)
 	if err != nil {
-		g.L.Info("access database error", zap.Error(err), zap.String("query", q1.String()))
+		g.L.Info("access database error", zap.Error(err))
 	}
 
 	return c.JSON(http.StatusOK, g.Result{

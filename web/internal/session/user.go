@@ -22,10 +22,9 @@ type User struct {
 
 func loadUser(id string) *User {
 	var name, email, mobile, priv, avatarURL string
-	q := utils.StaticCQL.Query(`SELECT name,email,mobile,priv,avatar_url FROM users WHERE id=?`, id)
-	err := q.Scan(&name, &email, &mobile, &priv, &avatarURL)
+	err := utils.DB.QueryRow(`SELECT name,email,mobile,priv,avatar_url FROM users WHERE id=?`, id).Scan(&name, &email, &mobile, &priv, &avatarURL)
 	if err != nil {
-		g.L.Warn("access database error", zap.Error(err), zap.String("query", q.String()))
+		g.L.Warn("access database error", zap.Error(err))
 		return nil
 	}
 
