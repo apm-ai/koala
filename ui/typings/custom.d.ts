@@ -29,11 +29,3 @@ declare const process: {
     REACT_APP_VSN_STATE?: string;
   }
 }
-
-declare module 'combokeys' {
-  export default class Combokeys {
-    constructor(element: HTMLElement);
-    bind: (binding: string | string[], handler: CombokeysHandler) => void;
-    reset: () => void;
-  }
-}
