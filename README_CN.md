@@ -3,8 +3,8 @@
 DataV是一个类似Grafana的数据查询、展示、告警平台，支持Metrics、Logs、Traces等常用数据形式。
 
 ## Features
-1. **类似Grafana** 
-- 在核心功能上DataV类似Grafana
+- **类似Grafana** 
+    在核心功能上DataV类似Grafana
 
 2.**图表插件:** 
 - 高性能、可扩展、漂亮的图表插件系统，同时支持丰富的选项配置
