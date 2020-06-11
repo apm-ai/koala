@@ -2,7 +2,7 @@ import { createAction } from '@reduxjs/toolkit';
 
 import { ApplicationState } from 'src/types/application'; 
 
-import storage from 'src/library/utils/localStorage'
+import storage from 'src/core/library/utils/localStorage'
 import {defaultConfig} from 'src/packages/datav-core'
 
 export const initialState: ApplicationState = {

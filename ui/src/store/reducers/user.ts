@@ -2,7 +2,7 @@ import { createAction } from '@reduxjs/toolkit';
 
 import { UserState } from 'src/types/user';
 
-import storage from 'src/library/utils/localStorage'
+import storage from 'src/core/library/utils/localStorage'
 
 import {defaultConfig} from 'src/packages/datav-core'
 

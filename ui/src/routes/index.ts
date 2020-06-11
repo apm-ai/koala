@@ -8,7 +8,7 @@ import {
 import Trace from './modules/trace'
 
 
-const Test = React.lazy(() => import('../pages/Test'))
+const Test = React.lazy(() => import('../views/Test'))
 
 const Routers = [
     {

@@ -15,9 +15,9 @@
 
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Provider as ReduxProvider} from 'react-redux';
+import { Provider as ReduxProvider } from 'react-redux';
 // eslint-disable-next-line import/order, import/no-unresolved
-import UIApp from './pages/App';
+import UIApp from './views/App';
 import './styles/main.less'
 import 'react-grid-layout/css/styles.css'
 
@@ -31,20 +31,51 @@ import 'u-basscss/css/position.css';
 import 'u-basscss/css/typography.css';
 
 const UI_ROOT_ID = 'apm-ui-root';
- 
+
 import './index.css';
 
-import * as serviceWorker from './serviceWorker';
 
-import { configureStore } from 'src/store/configureStore' 
-const store = configureStore();
+
+// init datasource service
+initDatasourceService()
+
+// init react dom
+initReactDOM()
+
+import { configureStore } from 'src/store/configureStore'
+function initReactDOM() {
+  const store = configureStore();
   ReactDOM.render(
     <ReduxProvider store={store}>
-          <UIApp />
+      <UIApp />
     </ReduxProvider>
     , document.getElementById(UI_ROOT_ID));
+}
 
 
+
+
+import { setDataSourceService } from 'src/packages/datav-core'
+import { DatasourceSrv, getDatasourceSrv } from 'src/core/services/datasource'
+function initDatasourceService() {
+  const ds = new DatasourceSrv()
+  setDataSourceService(ds);
+
+  testLoadDatasource()
+  console.log(11)
+}
+
+import { message} from 'antd';
+async function testLoadDatasource() {
+  try {
+    const datasource = await getDatasourceSrv().get('Prometheus');
+    console.log(datasource)
+  } catch (error) {
+     message.error(error.message)
+  }
+}
+
+import * as serviceWorker from './serviceWorker';
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
 // Learn more about service workers: https://bit.ly/CRA-PWA
