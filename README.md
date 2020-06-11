@@ -22,4 +22,4 @@ DataV allows you to query, visualize, alert on and understand your metrics no ma
 |**Explore**|Explore allows you to easily query temporary data|
 |**Multi Languages/Themes**|You can customize themes as you like.|
 |**Nice Code Design**|Pure Typescript + React + Go，Simple and Performance|
-|**Powerful Monitoring**|Seemlessly integrated with [Koala](https://github.com/apm-ai/koala) monitoring platfor |
+|**Powerful Monitoring**|Seemlessly integrated with [Koala](https://github.com/apm-ai/koala) monitoring platform|
