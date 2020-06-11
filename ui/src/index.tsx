@@ -39,6 +39,12 @@ import './index.css';
 // init datasource service
 initDatasourceService()
 
+// init backend service
+initBackendService()
+
+// init time service
+initTimeService()
+
 // init react dom
 initReactDOM()
 
@@ -55,28 +61,41 @@ function initReactDOM() {
 
 
 
-import { setDataSourceService } from 'src/packages/datav-core'
+import { setDataSourceService, setBackendSrv} from 'src/packages/datav-core'
 import { DatasourceSrv, getDatasourceSrv } from 'src/core/services/datasource'
+import { backendSrv } from 'src/core/services/backend'
 function initDatasourceService() {
   const ds = new DatasourceSrv()
   setDataSourceService(ds);
 
   testLoadDatasource()
-  console.log(11)
 }
 
 import { message} from 'antd';
 async function testLoadDatasource() {
   try {
-    const datasource = await getDatasourceSrv().get('Prometheus');
-    console.log(datasource)
+    const ds = await getDatasourceSrv().get('Prometheus');
+    console.log("load prometheus ok:",ds)
   } catch (error) {
      message.error(error.message)
   }
 }
 
+function initBackendService() {
+  setBackendSrv(backendSrv)
+}
+
+import { TimeSrv,setTimeSrv } from './core/services/time';
+function initTimeService() {
+  const ds = new TimeSrv()
+  ds.init()
+  setTimeSrv(ds);
+}
+
 import * as serviceWorker from './serviceWorker';
+
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
 // Learn more about service workers: https://bit.ly/CRA-PWA
 serviceWorker.unregister();
+

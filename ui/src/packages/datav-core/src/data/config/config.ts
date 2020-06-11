@@ -18,7 +18,22 @@ export const defaultConfig: DatavConfig = {
 
 // runtime config settings, most setted by user
 export const config = {
+    minRefreshInterval: '5s',
+    exploreEnabled: true,
+    viewersCanEdit: false,
     defaultDatasource: 'Prometheus',
+    timePicker: {
+        time : {from: "now-1h", to: "now"},
+        refresh: false,
+        timezone: 'browser'
+    },
+    featureToggles:  {
+        transformations: false,
+        expressions: false,
+        newEdit: false,
+        meta: false,
+        newVariables: true,
+    },
     datasources: {
         "Prometheus": {
             "id": 1,

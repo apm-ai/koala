@@ -32,6 +32,6 @@ export * from './orgs';
 export * from './flot';
 export * from './config'
 export * from './oldConfig'
-
+export * from './completions'
 
 
