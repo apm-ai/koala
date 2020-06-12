@@ -14,8 +14,8 @@
 
 package main
 
-import "github.com/apm-ai/DataV/web/cmd"
+import "github.com/apm-ai/DataV/backend/cmd"
 
-func main() { 
+func main() {
 	cmd.Execute()
 }

@@ -18,10 +18,10 @@ package cmd
 import (
 	"database/sql"
 
-	"github.com/apm-ai/DataV/web/cmd/sqls"
-	"github.com/apm-ai/DataV/web/pkg/config"
-	"github.com/apm-ai/DataV/web/pkg/db"
-	"github.com/apm-ai/DataV/web/pkg/log"
+	"github.com/apm-ai/DataV/backend/cmd/sqls"
+	"github.com/apm-ai/DataV/backend/pkg/config"
+	"github.com/apm-ai/DataV/backend/pkg/db"
+	"github.com/apm-ai/DataV/backend/pkg/log"
 	"github.com/spf13/cobra"
 	"go.uber.org/zap"
 )

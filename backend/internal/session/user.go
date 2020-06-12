@@ -3,8 +3,8 @@ package session
 import (
 	"sync"
 
-	"github.com/apm-ai/DataV/web/pkg/db"
-	"github.com/apm-ai/DataV/web/pkg/log"
+	"github.com/apm-ai/DataV/backend/pkg/db"
+	"github.com/apm-ai/DataV/backend/pkg/log"
 	"go.uber.org/zap"
 )
 

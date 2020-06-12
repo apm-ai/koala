@@ -19,9 +19,9 @@ import (
 	"os/signal"
 	"syscall"
 
-	service "github.com/apm-ai/DataV/web/internal/api-service"
-	"github.com/apm-ai/DataV/web/pkg/config"
-	"github.com/apm-ai/DataV/web/pkg/log"
+	service "github.com/apm-ai/DataV/backend/internal/api-service"
+	"github.com/apm-ai/DataV/backend/pkg/config"
+	"github.com/apm-ai/DataV/backend/pkg/log"
 	"github.com/spf13/cobra"
 
 	"go.uber.org/zap"
