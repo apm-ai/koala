@@ -25,7 +25,7 @@ import { filter, map, tap } from 'rxjs/operators';
 
 import PrometheusMetricFindQuery from './metric_find_query';
 import { ResultTransformer } from './result_transformer';
-import { getBackendSrv } from 'src/packages/datav-core';
+import { getBackendSrv} from 'src/packages/datav-core';
 import addLabelToQuery from './add_label_to_query';
 import { getQueryHints } from './query_hints';
 // Types
@@ -33,7 +33,7 @@ import { PromOptions, PromQuery, PromQueryRequest } from './types';
 import { safeStringifyValue } from 'src/core/library/utils/explore';
 import templateSrv from 'src/core/services/template';
 import { getTimeSrv } from 'src/core/services/time';
-import TableModel from 'src/core/table_model';
+import TableModel from 'src/core/table_model'; 
 
 export const ANNOTATION_QUERY_STEP_DEFAULT = '60s';
 

@@ -1,14 +1,16 @@
-package service
+package apiservice
 
 import (
 	"net/http"
 
 	"database/sql"
 
-	"github.com/apm-ai/DataV/web/config"
 	"github.com/apm-ai/DataV/web/internal/session"
-	"github.com/apm-ai/DataV/web/utils"
-	"github.com/imdevlab/g"
+	"github.com/apm-ai/DataV/web/pkg/common"
+	"github.com/apm-ai/DataV/web/pkg/config"
+	"github.com/apm-ai/DataV/web/pkg/db"
+	"github.com/apm-ai/DataV/web/pkg/i18n"
+	"github.com/apm-ai/DataV/web/pkg/log"
 	"github.com/labstack/echo"
 	"github.com/labstack/echo/middleware"
 	_ "github.com/mattn/go-sqlite3"
@@ -36,8 +38,8 @@ func (s *Service) Start() error {
 
 		e.Use(middleware.GzipWithConfig(middleware.GzipConfig{Level: 5}))
 
-		e.POST("/web/login", session.Login)
-		e.POST("/web/logout", session.Logout)
+		e.POST("/api/login", session.Login)
+		e.POST("/api/logout", session.Logout)
 
 		e.Logger.Fatal(e.Start(config.Data.Web.Addr))
 	}()
@@ -54,11 +56,7 @@ func (s *Service) checkLogin(f echo.HandlerFunc) echo.HandlerFunc {
 	return func(c echo.Context) error {
 		li := session.GetUser(c)
 		if li == nil {
-			return c.JSON(http.StatusOK, g.Result{
-				Status:  http.StatusUnauthorized,
-				ErrCode: g.NeedLoginC,
-				Message: g.NeedLoginE,
-			})
+			return c.JSON(http.StatusUnauthorized, common.ResponseErrorMessage(nil, i18n.ON, i18n.NeedLoginMsg))
 		}
 
 		return f(c)
@@ -66,9 +64,9 @@ func (s *Service) checkLogin(f echo.HandlerFunc) echo.HandlerFunc {
 }
 
 func (s *Service) initDB() {
-	db, err := sql.Open("sqlite3", "./datav.db")
+	d, err := sql.Open("sqlite3", "./datav.db")
 	if err != nil {
-		g.L.Fatal("open sqlite error", zap.Error(err))
+		log.Out.Fatal("open sqlite error", zap.Error(err))
 	}
-	utils.DB = db
+	db.SQL = d
 }

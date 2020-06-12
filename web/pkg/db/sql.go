@@ -1,7 +1,7 @@
-package utils
+package db
 
 import (
 	"database/sql"
 )
 
-var DB *sql.DB
+var SQL *sql.DB

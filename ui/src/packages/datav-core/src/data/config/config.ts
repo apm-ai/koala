@@ -18,6 +18,7 @@ export const defaultConfig: DatavConfig = {
 
 // runtime config settings, most setted by user
 export const config = {
+    baseUrl: 'http://localhost:9085/',
     minRefreshInterval: '5s',
     exploreEnabled: true,
     viewersCanEdit: false,

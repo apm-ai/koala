@@ -11,7 +11,7 @@ type localeAll = {
 }
 
 const localeAllData:localeAll =  {
-    'en': enUS,
-    'zh': zhCN
+    'en_US': enUS,
+    'zh_CN': zhCN
 }
 export default localeAllData

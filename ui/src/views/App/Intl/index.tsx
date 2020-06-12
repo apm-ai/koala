@@ -14,7 +14,7 @@ const Intl = (props: Props) =>{
     let messages = locale
     return (
         <>
-            <IntlProvider locale={props.locale.split('_')[0]} messages={messages[props.locale.split('_')[0]]}>
+            <IntlProvider locale={props.locale.split('_')[0]} messages={messages[props.locale]}>
                 {props.children}
             </IntlProvider>
         </>

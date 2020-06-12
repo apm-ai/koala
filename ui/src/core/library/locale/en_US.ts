@@ -19,6 +19,13 @@ const enUS:localeData = {
     traceDetail: 'Trace Detail',
     search: 'Search',
     detail: 'Detail',
-    changeTheme: 'Change Theme'
+    changeTheme: 'Change Theme',
+
+
+
+    // the msg content for BACKEND msgids ,msgids are defined in web/pkg/constant/msgid.go
+    databaseError: "fatal errors happend when accessing database",
+    userPwInvalid: "user not exist or password error",
+    needLogin: "You need to be authorized,please login"
 }
 export default enUS

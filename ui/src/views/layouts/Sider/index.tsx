@@ -7,7 +7,7 @@ import './index.less'
 import { FormattedMessage as Message } from 'react-intl'
 import { GlobalOutlined, UserOutlined,createFromIconfontCN} from '@ant-design/icons';
 import { isEmpty } from 'src/core/library/utils/validate'
-import { logout } from 'src/core/library/utils/account';
+import { logout } from 'src/core/library/utils/user';
 
 
 import { store } from 'src/store/store';
@@ -38,7 +38,7 @@ const SiderWrapper =  props => {
                         routers.map(route => {
                             if (isEmpty(route.children)) {
                                 return (
-                                    <Menu.Item key={`${route.path}`}>
+                                    <Menu.Item key={`${route.path}`} style={{ fontSize: '18px'}}>
                                         <Link to={route.path}>
 
                                             <route.icon />
@@ -76,7 +76,7 @@ const SiderWrapper =  props => {
                         })
                     }
 
-                    <Menu.Item key="set-locale1" style={{ position: 'absolute', bottom: '95px', right: '35px' }}>
+                    <Menu.Item key="set-locale1" style={{ position: 'absolute', bottom: '95px' ,fontSize: '18px'}}>
                         {
                             theme === 'light' ?
                                 <MyIcon type="icon-moon" onClick={() => {
@@ -89,13 +89,13 @@ const SiderWrapper =  props => {
 
                         <span><Message id='changeTheme' /></span>
                     </Menu.Item>
-                    <Menu.Item key="set-locale" style={{ position: 'absolute', bottom: '55px', right: '35px', fontSize: '16px' }}>
+                    <Menu.Item key="set-locale" style={{ position: 'absolute', bottom: '55px',  fontSize: '18px' }}>
                         <GlobalOutlined onClick={() => { 
                             store.dispatch(updateLocale()) 
                             }} />
                         <span><Message id='languages' /></span>
                     </Menu.Item>
-                    <SubMenu key="user-setting" icon={<UserOutlined />} style={{ position: 'absolute', bottom: '20px', right: '-6px', fontSize: '16px' }}>
+                    <SubMenu key="user-setting" icon={<UserOutlined />} style={{ position: 'absolute', bottom: '20px',  fontSize: '18px' }}>
                         <Menu.Item key="logout" onClick={logout}>Logout</Menu.Item>
                     </SubMenu>
                 </Menu>

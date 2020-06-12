@@ -7,13 +7,12 @@ import { UserOutlined, LockOutlined } from '@ant-design/icons';
 
 import storage from 'src/core/library/utils/localStorage'
 
-import request from 'src/core/library/utils/http' 
 import { isEmpty } from 'src/core/library/utils/validate'
 import { setToken } from 'src/core/library/utils/auth';
 
 import { store } from 'src/store/store';
 import { updateUser } from 'src/store/reducers/user';
-
+import {getBackendSrv} from 'src/packages/datav-core'
 
 function Login() {
     const layout = {
@@ -23,16 +22,15 @@ function Login() {
     const history = useHistory()
 
     const onFinish = (values:any) => {
-        request({
-            url: '/web/login',
-            method: 'POST',
-            params: {
+        getBackendSrv().post(
+            '/api/login',
+             {
                 userid:values.userid,
                 password: values.password
-            }
-        }).then(res => {
-            setToken(res.data.data.token)
-            store.dispatch(updateUser(res.data.data.user))
+            }).then(res => {
+                console.log(res)
+            setToken(res.data.token)
+            store.dispatch(updateUser(res.data.user))
             setTimeout(()=> {
                 const oldPath = storage.get('lastPath')
                 if (!isEmpty(oldPath)) {

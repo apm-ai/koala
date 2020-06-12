@@ -3,8 +3,8 @@ package session
 import (
 	"sync"
 
-	"github.com/apm-ai/DataV/web/utils"
-	"github.com/imdevlab/g"
+	"github.com/apm-ai/DataV/web/pkg/db"
+	"github.com/apm-ai/DataV/web/pkg/log"
 	"go.uber.org/zap"
 )
 
@@ -22,9 +22,9 @@ type User struct {
 
 func loadUser(id string) *User {
 	var name, email, mobile, priv, avatarURL string
-	err := utils.DB.QueryRow(`SELECT name,email,mobile,priv,avatar_url FROM users WHERE id=?`, id).Scan(&name, &email, &mobile, &priv, &avatarURL)
+	err := db.SQL.QueryRow(`SELECT name,email,mobile,priv,avatar_url FROM users WHERE id=?`, id).Scan(&name, &email, &mobile, &priv, &avatarURL)
 	if err != nil {
-		g.L.Warn("access database error", zap.Error(err))
+		log.Out.Warn("access database error", zap.Error(err))
 		return nil
 	}
 

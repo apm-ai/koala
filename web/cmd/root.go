@@ -19,9 +19,9 @@ import (
 	"os/signal"
 	"syscall"
 
-	"github.com/apm-ai/DataV/web/config"
-	"github.com/apm-ai/DataV/web/internal/service"
-	"github.com/imdevlab/g"
+	service "github.com/apm-ai/DataV/web/internal/api-service"
+	"github.com/apm-ai/DataV/web/pkg/config"
+	"github.com/apm-ai/DataV/web/pkg/log"
 	"github.com/spf13/cobra"
 
 	"go.uber.org/zap"
@@ -41,16 +41,16 @@ to quickly create a Cobra application.`,
 	// has an action associated with it:
 	Run: func(cmd *cobra.Command, args []string) {
 		config.Init("web.conf")
-		g.InitLogger(config.Data.Common.LogLevel)
+		log.InitLogger(config.Data.Common.LogLevel)
 
-		s := service.New()
-		s.Start()
+		service := service.New()
+		service.Start()
 		// 等待服务器停止信号
 		chSig := make(chan os.Signal)
 		signal.Notify(chSig, syscall.SIGINT, syscall.SIGTERM)
 		sig := <-chSig
-		g.L.Info("tracing received signal", zap.Any("signal", sig))
-		s.Close()
+		log.Out.Info("tracing received signal", zap.Any("signal", sig))
+		service.Close()
 	},
 }
 

@@ -18,8 +18,8 @@ import ReactDOM from 'react-dom';
 import { Provider as ReduxProvider } from 'react-redux';
 // eslint-disable-next-line import/order, import/no-unresolved
 import UIApp from './views/App';
-import './styles/main.less'
-import 'react-grid-layout/css/styles.css'
+
+
 
 // these need to go after the App import
 /* eslint-disable import/first */
@@ -30,9 +30,12 @@ import 'u-basscss/css/padding.css';
 import 'u-basscss/css/position.css';
 import 'u-basscss/css/typography.css';
 
+import 'react-grid-layout/css/styles.css'
+
 const UI_ROOT_ID = 'apm-ui-root';
 
-import './index.css';
+import './styles/main.less'
+import './index.less';
 
 
 

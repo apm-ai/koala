@@ -19,6 +19,11 @@ const zhCN: localeData = {
     traceDetail: '链路详情',
     search: '查询',
     detail: '详情',
-    changeTheme: '更换主题'
+    changeTheme: '更换主题',
+
+    // the msg content for BACKEND msgids ,msgids are defined in web/pkg/constant/msgid.go
+    databaseError: "访问数据库时发生致命错误",
+    userPwInvalid: "用户不存在或者密码不正确",
+    needLogin: "未授权请求，请重新登录"
 }
 export default zhCN

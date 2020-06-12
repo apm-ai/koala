@@ -37,6 +37,7 @@ interface Props {
 
 const UIApp = (props:Props) => {
   const { theme } = props
+  
   useEffect(() => {
     let vars = theme === "light" ? lightVars : darkVars;
     const newVars = { ...vars , "a": "b"}

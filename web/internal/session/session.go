@@ -3,8 +3,8 @@ package session
 import (
 	"time"
 
-	"github.com/apm-ai/DataV/web/utils"
-	"github.com/imdevlab/g"
+	"github.com/apm-ai/DataV/web/pkg/db"
+	"github.com/apm-ai/DataV/web/pkg/log"
 	"github.com/labstack/echo"
 	"go.uber.org/zap"
 )
@@ -17,9 +17,9 @@ type Session struct {
 
 func storeSession(s *Session) error {
 	q := `UPDATE sessions SET  user_id=? WHERE sid=?`
-	_,err := utils.DB.Exec(q, s.User.ID, s.Token)
+	_, err := db.SQL.Exec(q, s.User.ID, s.Token)
 	if err != nil {
-		g.L.Info("store session error", zap.Error(err))
+		log.Out.Info("store session error", zap.Error(err))
 		return err
 	}
 	return nil
@@ -28,7 +28,7 @@ func storeSession(s *Session) error {
 func loadSession(sid string) *Session {
 	var userid string
 	q := `SELECT user_id FROM sessions WHERE sid=?`
-	err := utils.DB.QueryRow(q, sid).Scan(&userid)
+	err := db.SQL.QueryRow(q, sid).Scan(&userid)
 	if err != nil {
 		return nil
 	}
@@ -45,9 +45,9 @@ func loadSession(sid string) *Session {
 
 func deleteSession(sid string) {
 	q := `DELETE FROM sessions  WHERE sid=?`
-	_,err := utils.DB.Exec(q, sid)
+	_, err := db.SQL.Exec(q, sid)
 	if err != nil {
-		g.L.Info("delete session error", zap.Error(err))
+		log.Out.Info("delete session error", zap.Error(err))
 	}
 }
 

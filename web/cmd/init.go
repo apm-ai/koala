@@ -19,9 +19,9 @@ import (
 	"database/sql"
 
 	"github.com/apm-ai/DataV/web/cmd/sqls"
-	"github.com/apm-ai/DataV/web/config"
-	"github.com/apm-ai/DataV/web/utils"
-	"github.com/imdevlab/g"
+	"github.com/apm-ai/DataV/web/pkg/config"
+	"github.com/apm-ai/DataV/web/pkg/db"
+	"github.com/apm-ai/DataV/web/pkg/log"
 	"github.com/spf13/cobra"
 	"go.uber.org/zap"
 )
@@ -33,11 +33,11 @@ var initCmd = &cobra.Command{
 	Long:  ``,
 	Run: func(cmd *cobra.Command, args []string) {
 		config.Init("web.conf")
-		g.InitLogger(config.Data.Common.LogLevel)
+		log.InitLogger(config.Data.Common.LogLevel)
 
 		createTables()
 
-		g.L.Info("init enviroments ok, you can start datav now")
+		log.Out.Info("init enviroments ok, you can start datav now")
 	},
 }
 
@@ -56,19 +56,19 @@ func init() {
 }
 
 func createTables() {
-	db, err := sql.Open("sqlite3", "./datav.db")
+	d, err := sql.Open("sqlite3", "./datav.db")
 	if err != nil {
-		g.L.Fatal("open sqlite error", zap.Error(err))
+		log.Out.Fatal("open sqlite error", zap.Error(err))
 	}
-	utils.DB = db
+	db.SQL = d
 
 	// create tables
 	for _, q := range sqls.CreateTableSqls {
-		_, err = db.Exec(q)
+		_, err = d.Exec(q)
 		if err != nil {
-			g.L.Fatal("sqlite create table error", zap.Error(err), zap.String("sql", q))
+			log.Out.Fatal("sqlite create table error", zap.Error(err), zap.String("sql", q))
 		}
 	}
 
-	g.L.Info("create tables ok")
+	log.Out.Info("create tables ok")
 }
