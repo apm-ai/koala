@@ -49,9 +49,7 @@ export const TimeRangeList: React.FC<Props> = props => {
 
   return (
     <>
-      <div className={styles.title}>
-        <TimePickerTitle>{title}</TimePickerTitle>
-      </div>
+      <TimePickerTitle>{title}</TimePickerTitle>
       <Options {...props} />
     </>
   );

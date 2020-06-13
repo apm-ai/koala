@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react';
 import classNames from 'classnames';
 import { SelectableValue } from 'src/packages/datav-core';
 import { css } from 'emotion';
-import {Select,Tooltip} from 'antd'
+import {Select,Tooltip,Button} from 'antd'
 
 import {ReloadOutlined} from '@ant-design/icons';
 import memoizeOne from 'memoize-one';
@@ -81,12 +81,11 @@ export class RefreshPickerBase extends PureComponent<Props> {
             refreshButton
           ) : (
             <Tooltip placement="top" title={tooltip!}>
-              <button
-                className="btn btn--radius-right-0 navbar-button navbar-button--border-right-0"
+              <Button
                 onClick={onRefresh!}
               >
                 <ReloadOutlined />
-              </button>
+              </Button>
             </Tooltip>
           )}
           <Select

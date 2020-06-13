@@ -9,7 +9,7 @@ const getStyles = stylesFactory(() => {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 7px 9px 7px 9px;
+      padding-left: 7px;
       border-left: 2px solid rgba(255, 255, 255, 0);
 
       &:hover {

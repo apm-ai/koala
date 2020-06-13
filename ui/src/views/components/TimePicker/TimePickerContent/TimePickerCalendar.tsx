@@ -91,6 +91,12 @@ const getBodyStyles = stylesFactory(() => {
       background-color: #141619;
       width: 268px;
 
+      abbr {
+        margin-top: -15px !important;
+        height: 26px;
+        display: block;
+      }
+
       .react-calendar__navigation__label,
       .react-calendar__navigation__arrow,
       .react-calendar__navigation {
@@ -112,6 +118,7 @@ const getBodyStyles = stylesFactory(() => {
           cursor: default;
           display: block;
           padding: 4px 0 4px 0;
+          margin-bottom: 15px !important;
         }
       }
 
@@ -123,7 +130,7 @@ const getBodyStyles = stylesFactory(() => {
       .react-calendar__tile--now {
         margin-bottom: 4px;
         background-color: inherit;
-        height: 26px;
+        height: 40px !important;
       }
 
       .react-calendar__navigation__label,
@@ -147,13 +154,12 @@ const getBodyStyles = stylesFactory(() => {
         border: 0px;
         color: ;
         font-weight: 500;
-        background: #5794f2;
+        background: #1f60c4;
 
         abbr {
-          background-color: #1f60c4;
           border-radius: 100px;
           display: block;
-          padding-top: 2px;
+          margin-top: -15px !important;
           height: 26px;
         }
       }

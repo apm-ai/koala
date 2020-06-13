@@ -13,6 +13,7 @@ import { TimeRangeList } from './TimeRangeList';
 const getStyles = stylesFactory(() => {
   return {
     container: css`
+      color: rgba(255, 255, 255, 0.65);
       display: flex;
       background: #141619;
       box-shadow: 0px 0px 20px #000000;
@@ -149,7 +150,7 @@ export const TimePickerContentWithScreenSize: React.FC<PropsWithScreenSize> = pr
 };
 
 export const TimePickerContent: React.FC<Props> = props => {
-  const isFullscreen = useMedia(`(min-width: 992px`);
+  const isFullscreen = useMedia(`(min-width: 992px)`);
 
   return <TimePickerContentWithScreenSize {...props} isFullscreen={isFullscreen} />;
 };
@@ -163,12 +164,12 @@ const NarrowScreenForm: React.FC<FormProps> = props => {
   }
 
   const styles = getNarrowScreenStyles();
-
+  
   return (
     <>
       <div className={styles.header} onClick={() => setCollapsed(!collapsed)}>
         <TimePickerTitle>Absolute time range</TimePickerTitle>
-        {collapsed ? <UpOutlined />: <DownOutlined />} />}
+        {collapsed ? <UpOutlined />: <DownOutlined />}
       </div>
       {collapsed && (
         <div className={styles.body}>

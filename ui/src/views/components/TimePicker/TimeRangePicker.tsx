@@ -3,8 +3,8 @@ import React, { PureComponent, memo, FormEvent } from 'react';
 import { css, cx } from 'emotion';
 
 // Components
-import { Tooltip } from 'antd';
-import { UpOutlined,DownOutlined,ClockCircleOutlined,LeftOutlined,RightOutlined,MinusCircleOutlined} from '@ant-design/icons';
+import { Tooltip, Button } from 'antd';
+import { UpOutlined, DownOutlined, ClockCircleOutlined, LeftOutlined, RightOutlined, MinusCircleOutlined } from '@ant-design/icons';
 import { TimePickerContent } from './TimePickerContent/TimePickerContent';
 import { ClickOutsideWrapper } from '../ClickOutsideWrapper/ClickOutsideWrapper';
 
@@ -57,11 +57,10 @@ const getStyles = stylesFactory(() => {
   return {
     container: css`
       position: relative;
-      display: flex;
       flex-flow: column nowrap;
     `,
     buttons: css`
-      display: flex;
+      display: -webkit-box;
     `,
     caretIcon: css`
       margin-left: 4px;
@@ -97,7 +96,7 @@ export interface State {
   isOpen: boolean;
 }
 
-export interface Props  {
+export interface Props {
   hideText?: boolean;
   value: TimeRange;
   timeZone?: TimeZone;
@@ -121,7 +120,7 @@ export class UnthemedTimeRangePicker extends PureComponent<Props, State> {
     this.setState({ isOpen: false });
   };
 
-  onOpen = (event: FormEvent<HTMLButtonElement>) => {
+  onOpen = (event) => {
     const { isOpen } = this.state;
     event.stopPropagation();
     this.setState({ isOpen: !isOpen });
@@ -148,26 +147,22 @@ export class UnthemedTimeRangePicker extends PureComponent<Props, State> {
     const hasAbsolute = isDateTime(value.raw.from) || isDateTime(value.raw.to);
     const syncedTimePicker = timeSyncButton && isSynced;
     const timePickerIconClass = cx({ ['icon-brand-gradient']: syncedTimePicker });
-    const timePickerButtonClass = cx('btn navbar-button navbar-button--tight', {
-      [`btn--radius-right-0 ${styles.noRightBorderStyle}`]: !!timeSyncButton,
-      [`explore-active-button`]: syncedTimePicker,
-    });
 
     return (
       <div className={styles.container}>
         <div className={styles.buttons}>
           {hasAbsolute && (
-            <button className="btn navbar-button navbar-button--tight" onClick={onMoveBackward}>
+            <Button  onClick={onMoveBackward}>
               <LeftOutlined />
-            </button>
+            </Button>
           )}
           <div>
             <Tooltip title={<TimePickerTooltip timeRange={value} timeZone={timeZone} />} placement="bottom">
-              <button aria-label="TimePicker Open Button" className={timePickerButtonClass} onClick={this.onOpen}>
-                <ClockCircleOutlined className={cx(styles.clockIcon, timePickerIconClass)}  />
+              <Button aria-label="TimePicker Open Button" onClick={this.onOpen}>
+                <ClockCircleOutlined className={cx(styles.clockIcon, timePickerIconClass)} />
                 <TimePickerButtonLabel {...this.props} />
-                <span className={styles.caretIcon}>{isOpen ? <UpOutlined />: <DownOutlined />}</span>
-              </button>
+                <span className={styles.caretIcon}>{isOpen ? <UpOutlined /> : <DownOutlined />}</span>
+              </Button>
             </Tooltip>
             {isOpen && (
               <ClickOutsideWrapper onClick={this.onClose}>
@@ -186,16 +181,18 @@ export class UnthemedTimeRangePicker extends PureComponent<Props, State> {
           {timeSyncButton}
 
           {hasAbsolute && (
-            <button className="btn navbar-button navbar-button--tight" onClick={onMoveForward}>
+            <Button  onClick={onMoveForward}>
               <RightOutlined />
-            </button>
+            </Button>
           )}
+          <div>
 
-          <Tooltip title={ZoomOutTooltip} placement="bottom">
-            <button className="btn navbar-button navbar-button--zoom" onClick={onZoom}>
-              <MinusCircleOutlined />
-            </button>
-          </Tooltip>
+            <Tooltip title={ZoomOutTooltip} placement="bottom">
+              <Button onClick={onZoom}>
+                <MinusCircleOutlined />
+              </Button>
+            </Tooltip>
+          </div>
         </div>
       </div>
     );
