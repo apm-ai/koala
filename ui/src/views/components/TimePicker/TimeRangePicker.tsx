@@ -1,8 +1,7 @@
 // Libraries
-import React, { PureComponent, memo, FormEvent } from 'react';
+import React, { PureComponent, memo } from 'react';
 import { css, cx } from 'emotion';
 import {withRouter } from 'react-router-dom';
-import { History as RouterHistory, Location } from 'history';
 // Components
 import { Tooltip, Button } from 'antd';
 import { UpOutlined, DownOutlined, ClockCircleOutlined, LeftOutlined, RightOutlined, PlusOutlined } from '@ant-design/icons';
@@ -134,7 +133,6 @@ export class UnthemedTimeRangePicker extends PureComponent<Props&any, State> {
       value,
       onMoveBackward,
       onMoveForward,
-      onZoom,
       timeZone,
       timeSyncButton,
       isSynced,
@@ -146,7 +144,7 @@ export class UnthemedTimeRangePicker extends PureComponent<Props&any, State> {
     const styles = getStyles();
     const hasAbsolute = isDateTime(value.raw.from) || isDateTime(value.raw.to);
     const syncedTimePicker = timeSyncButton && isSynced;
-    const timePickerIconClass = cx({ ['icon-brand-gradient']: syncedTimePicker });
+    const timePickerIconClass = cx({ 'icon-brand-gradient': syncedTimePicker });
     
     const addTimeParamsToUrl = () =>  {
       addParamsToUrl(history,location)

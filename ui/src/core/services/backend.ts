@@ -1,5 +1,5 @@
-import { from, merge, MonoTypeOperatorFunction, Observable, of, Subject, throwError } from 'rxjs';
-import { catchError, filter, map, mergeMap, retryWhen, share, takeUntil, tap, throwIfEmpty } from 'rxjs/operators';
+import { merge, MonoTypeOperatorFunction, Observable, of, Subject, throwError } from 'rxjs';
+import { catchError, filter, map, mergeMap, share, takeUntil, tap, throwIfEmpty } from 'rxjs/operators';
 import { fromFetch } from 'rxjs/fetch';
 import { BackendSrv as BackendService, BackendSrvRequest, config } from 'src/packages/datav-core';
 
@@ -409,7 +409,7 @@ export class BackendSrv implements BackendService {
 
   private getFromFetchStream = (options: BackendSrvRequest) => {
     // add token to headers 
-    options.headers == undefined ? options.headers = { 'X-Token': getToken() } : options.headers['X-Token'] = getToken()
+    options.headers === undefined ? options.headers = { 'X-Token': getToken() } : options.headers['X-Token'] = getToken()
 
 
     let url = parseUrlFromOptions(options);

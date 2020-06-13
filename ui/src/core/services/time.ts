@@ -2,7 +2,6 @@
 import _ from 'lodash';
 // Utils
 import kbn from '../library/utils/kbn';
-import * as queryString from 'query-string'
 
 // Types
 import {
@@ -22,14 +21,14 @@ import {timer} from './timer'
 
 import { store } from 'src/store/store';
 import { updateStartDate,updateEndDate } from 'src/store/reducers/application';
-import {addParamsToUrl,getUrlParams} from 'src/core/library/utils/url'
+import {addParamsToUrl,getUrlParams,addParamToUrl,removeParamFromUrl} from 'src/core/library/utils/url'
 //@todo
 // 替换成真实的url参数
 export class TimeSrv {
   time: any;
   refreshTimer: any;
-  refresh: any;
-  oldRefresh: boolean;
+  refresh: string;
+  oldRefresh: string;
   timeAtLoad: any;
   private autoRefreshBlocked: boolean;
 
@@ -46,6 +45,7 @@ export class TimeSrv {
 
     this.initTimeFromUrl();
 
+
     this.parseTime();
 
     // remember time at load so we can go back to it
@@ -55,12 +55,12 @@ export class TimeSrv {
       this.setAutoRefresh(this.refresh);
     }
 
+    console.log('init refresh',this.refresh)
     document.addEventListener('visibilitychange', () => {
       if (this.autoRefreshBlocked && document.visibilityState === 'visible') {
         this.autoRefreshBlocked = false;
       }
     });
-    
   }
   
   getValidIntervals(intervals: string[]): string[] {
@@ -110,22 +110,6 @@ export class TimeSrv {
     return null;
   }
 
-  private getTimeWindow(time: string, timeWindow: string) {
-    const valueTime = parseInt(time, 10);
-    let timeWindowMs;
-
-    if (timeWindow.match(/^\d+$/) && parseInt(timeWindow, 10)) {
-      // when time window specified in ms
-      timeWindowMs = parseInt(timeWindow, 10);
-    } else {
-      timeWindowMs = kbn.interval_to_ms(timeWindow);
-    }
-
-    return {
-      from: toUtc(valueTime - timeWindowMs / 2),
-      to: toUtc(valueTime + timeWindowMs / 2),
-    };
-  }
 
   private initTimeFromUrl() {
     const params = getUrlParams()
@@ -138,22 +122,22 @@ export class TimeSrv {
     }
     // if absolute ignore refresh option saved to dashboard
     if (params.to && params.to.indexOf('now') === -1) {
-      this.refresh = false;
-      config.timePicker.refresh = false;
+      this.refresh = '';
+      config.timePicker.refresh = '';
     }
     // but if refresh explicitly set then use that
     if (params.refresh) {
       if (contextSrv.isAllowedInterval(params.refresh)) {
-        this.refresh = config.minRefreshInterval;
+        this.refresh = params.refresh 
       } else {
-        this.refresh = params.refresh || this.refresh;
+        this.refresh = config.minRefreshInterval
       }
     }
   }
 
 
 
-  setAutoRefresh(interval: any) {
+  setAutoRefresh(interval: string,router?: any) {
     config.timePicker.refresh = interval;
     this.cancelNextRefresh();
 
@@ -166,22 +150,15 @@ export class TimeSrv {
       }, intervalMs)
       this.refreshTimer = timer.register(t);
     }
-
-    // update url inside timeout to so that a digest happens after (called from react)
-     setTimeout(() => {
-      const params = getUrlParams()
-      if (interval) {
-        params.refresh = contextSrv.getValidInterval(interval);
-        //@todo
-        // 更新url params中的refresh
-   
-      } else if (params.refresh) {
-        delete params.refresh;
-          //@todo
-        // 更新url params中的refresh
     
+    // update url inside timeout to so that a digest happens after (called from react)
+    if (router) {
+      if (interval !== '') {
+        addParamToUrl(router.history,router.location,{refresh:interval})
+      } else  {
+        removeParamFromUrl(router.history,router.location,'refresh')
       }
-    });
+    }
   }
 
 
@@ -209,7 +186,7 @@ export class TimeSrv {
     // disable refresh if zoom in or zoom out
     if (isDateTime(time.to)) {
       this.oldRefresh = config.timePicker.refresh || this.oldRefresh;
-      this.setAutoRefresh(false);
+      this.setAutoRefresh('');
     } else if (this.oldRefresh && this.oldRefresh !== config.timePicker.refresh) {
       this.setAutoRefresh(this.oldRefresh);
       this.oldRefresh = null;

@@ -1,6 +1,4 @@
 import { DatavConfig, DataSourceInstanceSettings } from '../types'
-import moment from 'moment'
-
 // default config settings
 export const defaultConfig: DatavConfig = {
     panel: { newTitle: 'Panel Title' },
@@ -25,7 +23,7 @@ export const config = {
     defaultDatasource: 'Prometheus',
     timePicker: {
         time : {from: "now-1h", to: "now"},
-        refresh: false,
+        refresh: '',
         timezone: 'browser'
     },
     featureToggles:  {

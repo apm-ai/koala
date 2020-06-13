@@ -6,16 +6,6 @@ import { TimeRangeOption } from './TimeRangeOption';
 import { mapOptionToTimeRange } from './mapper';
 import { stylesFactory } from 'src/core/library/utils/theme';
 
-const getStyles = stylesFactory(() => {
-  return {
-    title: css`
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 8px 16px 5px 9px;
-    `,
-  };
-});
 
 const getOptionsStyles = stylesFactory(() => {
   return {
@@ -36,7 +26,6 @@ interface Props {
 }
 
 export const TimeRangeList: React.FC<Props> = props => {
-  const styles = getStyles();
   const { title, options, placeholderEmpty } = props;
 
   if (typeof placeholderEmpty !== 'undefined' && options.length <= 0) {

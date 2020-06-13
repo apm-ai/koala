@@ -1,6 +1,5 @@
 import React, { PureComponent } from 'react';
 import classNames from 'classnames';
-import { SelectableValue } from 'src/packages/datav-core';
 import { css } from 'emotion';
 import {Select,Tooltip,Button} from 'antd'
 
@@ -33,15 +32,23 @@ export interface Props {
   buttonSelectClassName?: string;
 }
 
-export class RefreshPickerBase extends PureComponent<Props> {
+interface State {
+  selectedOption: {label:string,value:string}
+}
+
+export class RefreshPickerBase extends PureComponent<Props,State> {
   static offOption = { label: 'Off', value: '' };
   static liveOption = { label: 'Live', value: 'LIVE' };
   static isLive = (refreshInterval?: string): boolean => refreshInterval === RefreshPicker.liveOption.value;
 
   constructor(props: Props) {
     super(props);
+    this.state = {
+      selectedOption: {label:'Off',value : props.value}
+    }
   }
 
+  
   intervalsToOptions = (intervals: string[] | undefined) => {
     const intervalsOrDefault = intervals || defaultIntervals;
     const options = intervalsOrDefault.map(interval => ({ label: interval, value: interval }));
@@ -54,24 +61,26 @@ export class RefreshPickerBase extends PureComponent<Props> {
     return options;
   };
 
-  onChangeSelect = (item) => {
+  onChangeSelect = (interval:string,option) => {
+    this.setState({selectedOption:option})
     const { onIntervalChanged } = this.props;
     if (onIntervalChanged) {
-      // @ts-ignore
-      onIntervalChanged(item.value);
+      onIntervalChanged(interval);
     }
   };
 
   render() {
-    const { onRefresh, intervals, tooltip, value, refreshButton, buttonSelectClassName } = this.props;
+    const { onRefresh, intervals, tooltip, refreshButton, buttonSelectClassName } = this.props;
+    const {selectedOption} = this.state
+
     const options = this.intervalsToOptions(intervals);
-    const selectedValue = {label:'1m',value : '1m'}
+
     const styles = getStyles();
 
     const cssClasses = classNames({
       'refresh-picker': true,
-      'refresh-picker--off': selectedValue.label === RefreshPicker.offOption.label,
-      'refresh-picker--live': selectedValue === RefreshPicker.liveOption,
+      'refresh-picker--off': selectedOption.label === RefreshPicker.offOption.label,
+      'refresh-picker--live': selectedOption === RefreshPicker.liveOption,
     });
 
     return (
@@ -90,7 +99,7 @@ export class RefreshPickerBase extends PureComponent<Props> {
           )}
           <Select
             className={classNames('navbar-button--attached', styles.selectButton, buttonSelectClassName)}
-            value={selectedValue.value}
+            value={selectedOption.value}
             options={options}
             onChange={this.onChangeSelect}
           />

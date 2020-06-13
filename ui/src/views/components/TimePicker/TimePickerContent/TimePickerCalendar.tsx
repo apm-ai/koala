@@ -251,7 +251,7 @@ const Body = memo<Props>(({ onChange, from, to, timeZone }) => {
 
   useEffect(() => {
     setValue(inputToValue(from, to));
-  }, []);
+  }, [from,to]);
 
   return (
     <Calendar
@@ -306,7 +306,7 @@ function useOnCalendarChange(onChange: (from: DateTime, to: DateTime) => void, t
 
       onChange(from, to);
     },
-    [onChange]
+    [onChange,timeZone]
   );
 }
 

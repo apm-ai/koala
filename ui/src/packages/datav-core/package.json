@@ -11,7 +11,6 @@
   "main": "src/index.ts",
   "scripts": {},
   "dependencies": {
-    "moment": "2.24.0",
     "moment-timezone": "0.5.28",
     "apache-arrow": "0.16.0",
     "@braintree/sanitize-url": "4.0.0",

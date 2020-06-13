@@ -50,7 +50,8 @@ class UnthemedDashNavTimeControls extends Component<any> {
   }
 
   onChangeRefreshInterval = (interval: string) => {
-    getTimeSrv().setAutoRefresh(interval);
+    const {history,location} = this.props
+    getTimeSrv().setAutoRefresh(interval,{history,location});
     this.forceUpdate();
   };
 
@@ -92,7 +93,7 @@ class UnthemedDashNavTimeControls extends Component<any> {
     const timePickerValue = getTimeSrv().timeRange();
     const timeZone = config.timePicker.timezone
     const styles = getStyles();
-
+    const refresh = getTimeSrv().refresh
     return (
       <div className={styles.container}>
         <TimePickerWithHistory
@@ -106,7 +107,7 @@ class UnthemedDashNavTimeControls extends Component<any> {
         <RefreshPicker
           onIntervalChanged={this.onChangeRefreshInterval}
           onRefresh={this.onRefresh}
-          value='1m'
+          value={refresh}
           intervals={intervals}
           tooltip="Refresh dashboard"
         />
