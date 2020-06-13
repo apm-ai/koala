@@ -67,7 +67,11 @@
     "systemjs-plugin-css": "0.1.37",
     "typescript": "3.7.5",
     "u-basscss": "^2.0.1",
-    "xss": "1.0.6"
+    "xss": "1.0.6",
+    "rc-time-picker": "^3.7.3",
+    "emotion": "10.0.27",
+    "react-calendar": "2.19.2",
+    "react-use": "13.27.0"
   },
   "devDependencies": {
     "@types/classnames": "^2.2.7",

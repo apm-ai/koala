@@ -6,4 +6,4 @@ export * from './folder'
 export type KeyValuePair = {
     key: string;
     value: any;
-  };
+};

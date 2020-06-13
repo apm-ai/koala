@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import isNil from 'lodash/isNil';
 import classNames from 'classnames';
 import Scrollbars from 'react-custom-scrollbars';
-import 'index.less'
+import './index.less'
 
 interface Props {
   className?: string;
