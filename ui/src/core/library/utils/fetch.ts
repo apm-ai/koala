@@ -91,7 +91,6 @@ export const parseBody = (options: BackendSrvRequest, isAppJson: boolean) => {
   }
 
   if (!options.data || typeof options.data === 'string') {
-    console.log(options)
     return options.data;
   }
 

@@ -39,17 +39,6 @@ import './index.less';
 
 
 
-// init datasource service
-initDatasourceService()
-
-// init backend service
-initBackendService()
-
-// init time service
-initTimeService()
-
-// init react dom
-initReactDOM()
 
 import { configureStore } from 'src/store/configureStore'
 function initReactDOM() {
@@ -61,39 +50,9 @@ function initReactDOM() {
     , document.getElementById(UI_ROOT_ID));
 }
 
+// init react dom
+initReactDOM()
 
-
-
-import { setDataSourceService, setBackendSrv} from 'src/packages/datav-core'
-import { DatasourceSrv, getDatasourceSrv } from 'src/core/services/datasource'
-import { backendSrv } from 'src/core/services/backend'
-function initDatasourceService() {
-  const ds = new DatasourceSrv()
-  setDataSourceService(ds);
-
-  testLoadDatasource()
-}
-
-import { message} from 'antd';
-async function testLoadDatasource() {
-  try {
-    const ds = await getDatasourceSrv().get('Prometheus');
-    console.log("load prometheus ok:",ds)
-  } catch (error) {
-     message.error(error.message)
-  }
-}
-
-function initBackendService() {
-  setBackendSrv(backendSrv)
-}
-
-import { TimeSrv,setTimeSrv } from './core/services/time';
-function initTimeService() {
-  const ds = new TimeSrv()
-  ds.init()
-  setTimeSrv(ds);
-}
 
 import * as serviceWorker from './serviceWorker';
 

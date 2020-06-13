@@ -1,10 +1,11 @@
 // Libraries
 import React, { PureComponent, memo, FormEvent } from 'react';
 import { css, cx } from 'emotion';
-
+import {withRouter } from 'react-router-dom';
+import { History as RouterHistory, Location } from 'history';
 // Components
 import { Tooltip, Button } from 'antd';
-import { UpOutlined, DownOutlined, ClockCircleOutlined, LeftOutlined, RightOutlined, MinusCircleOutlined } from '@ant-design/icons';
+import { UpOutlined, DownOutlined, ClockCircleOutlined, LeftOutlined, RightOutlined, PlusOutlined } from '@ant-design/icons';
 import { TimePickerContent } from './TimePickerContent/TimePickerContent';
 import { ClickOutsideWrapper } from '../ClickOutsideWrapper/ClickOutsideWrapper';
 
@@ -14,8 +15,7 @@ import { stylesFactory } from 'src/core/library/utils/theme';
 // Types
 import { isDateTime, rangeUtil, dateTimeFormat, timeZoneFormatUserFriendly } from 'src/packages/datav-core';
 import { TimeRange, TimeOption, TimeZone, dateMath } from 'src/packages/datav-core';
-
-
+import {addParamsToUrl} from 'src/core/library/utils/url'
 const quickOptions: TimeOption[] = [
   { from: 'now-5m', to: 'now', display: 'Last 5 minutes', section: 3 },
   { from: 'now-15m', to: 'now', display: 'Last 15 minutes', section: 3 },
@@ -106,11 +106,10 @@ export interface Props {
   onMoveBackward: () => void;
   onMoveForward: () => void;
   onZoom: () => void;
-  history?: TimeRange[];
 }
 
 
-export class UnthemedTimeRangePicker extends PureComponent<Props, State> {
+export class UnthemedTimeRangePicker extends PureComponent<Props&any, State> {
   state: State = {
     isOpen: false,
   };
@@ -140,6 +139,7 @@ export class UnthemedTimeRangePicker extends PureComponent<Props, State> {
       timeSyncButton,
       isSynced,
       history,
+      location
     } = this.props;
 
     const { isOpen } = this.state;
@@ -147,6 +147,10 @@ export class UnthemedTimeRangePicker extends PureComponent<Props, State> {
     const hasAbsolute = isDateTime(value.raw.from) || isDateTime(value.raw.to);
     const syncedTimePicker = timeSyncButton && isSynced;
     const timePickerIconClass = cx({ ['icon-brand-gradient']: syncedTimePicker });
+    
+    const addTimeParamsToUrl = () =>  {
+      addParamsToUrl(history,location)
+    }
 
     return (
       <div className={styles.container}>
@@ -172,7 +176,6 @@ export class UnthemedTimeRangePicker extends PureComponent<Props, State> {
                   onChange={this.onChange}
                   otherOptions={otherOptions}
                   quickOptions={quickOptions}
-                  history={history}
                 />
               </ClickOutsideWrapper>
             )}
@@ -188,8 +191,8 @@ export class UnthemedTimeRangePicker extends PureComponent<Props, State> {
           <div>
 
             <Tooltip title={ZoomOutTooltip} placement="bottom">
-              <Button onClick={onZoom}>
-                <MinusCircleOutlined />
+              <Button onClick={addTimeParamsToUrl}>
+                <PlusOutlined />
               </Button>
             </Tooltip>
           </div>
@@ -199,9 +202,10 @@ export class UnthemedTimeRangePicker extends PureComponent<Props, State> {
   }
 }
 
+
 const ZoomOutTooltip = () => (
   <>
-    Time range zoom out <br /> CTRL+Z
+    Add time/variable/other to url, this helps sharing snapshot to other user
   </>
 );
 
@@ -221,7 +225,7 @@ const TimePickerTooltip = ({ timeRange, timeZone }: { timeRange: TimeRange; time
 };
 
 
-const TimePickerButtonLabel = memo<Props>(({ hideText, value, timeZone }) => {
+const TimePickerButtonLabel = memo<Props & any>(({ hideText, value, timeZone }) => {
   const styles = getLabelStyles();
 
   if (hideText) {
@@ -244,4 +248,4 @@ const formattedRange = (value: TimeRange, timeZone?: TimeZone) => {
   return rangeUtil.describeTimeRange(adjustedTimeRange, timeZone);
 };
 
-export const TimeRangePicker = UnthemedTimeRangePicker;
+export const TimeRangePicker = withRouter(UnthemedTimeRangePicker);

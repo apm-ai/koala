@@ -7,10 +7,7 @@ import './index.less'
 import BreadcrumbWrapper from '../Breadcrumb'
 
 import {StoreState} from 'src/types'  
-import { store } from 'src/store/store';
-import { updateStartDate,updateEndDate } from 'src/store/reducers/application';
-import {TimeControl} from './TimeControl'
-import {getTimeSrv} from 'src/core/services/time'
+import {TimePickerWrapper} from 'src/views/components/TimePicker/TimePickerWrapper'
 
 interface Props {
     startDate: any ,
@@ -20,12 +17,6 @@ interface Props {
 const { Header } = Layout
 
 function HeaderWrapper(props: Props) { 
-    function changeDate(_: any, dateString: any) {
-        store.dispatch(updateStartDate(dateString[0]))
-        store.dispatch(updateEndDate(dateString[1]))
-    }
-
-    const timePickerValue = getTimeSrv().timeRange();
     return (
         <Header className="datav-header">
             <div className='datav-header-inner'>
@@ -33,7 +24,7 @@ function HeaderWrapper(props: Props) {
                     <BreadcrumbWrapper />
                 </div>
                 <div>
-                    <TimeControl />
+                    <TimePickerWrapper />
                 </div>
             </div>
         </Header>

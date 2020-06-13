@@ -5,7 +5,7 @@ import { Props as TimePickerProps, TimeRangePicker } from './TimeRangePicker';
 
 const LOCAL_STORAGE_KEY = 'grafana.dashboard.timepicker.history';
 
-interface Props extends Omit<TimePickerProps, 'history' | 'theme'> {}
+interface Props extends Omit<TimePickerProps, 'history' | 'theme '> {}
 
 export const TimePickerWithHistory: React.FC<Props> = props => {
   return (
@@ -14,9 +14,8 @@ export const TimePickerWithHistory: React.FC<Props> = props => {
         return (
           <TimeRangePicker
             {...props}
-            history={convertIfJson(values)}
+            // history={convertIfJson(values)}
             onChange={value => {
-              onAppendToHistory(value, values, onSaveToStore);
               props.onChange(value);
             }}
           />
@@ -40,18 +39,3 @@ function convertIfJson(history: TimeRange[]): TimeRange[] {
   });
 }
 
-function onAppendToHistory(toAppend: TimeRange, values: TimeRange[], onSaveToStore: (values: TimeRange[]) => void) {
-  if (!isAbsolute(toAppend)) {
-    return;
-  }
-  const toStore = limit([toAppend, ...values]);
-  onSaveToStore(toStore);
-}
-
-function isAbsolute(value: TimeRange): boolean {
-  return isDateTime(value.raw.from) || isDateTime(value.raw.to);
-}
-
-function limit(value: TimeRange[]): TimeRange[] {
-  return value.slice(0, 4);
-}

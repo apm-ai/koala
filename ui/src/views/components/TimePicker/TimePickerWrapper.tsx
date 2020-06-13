@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import { dateMath,TimeRange,config} from 'src/packages/datav-core';
 import { css } from 'emotion';
 
+import {withRouter } from 'react-router-dom';
 
 // import { LocationState } from 'app/types';
 // State
@@ -26,9 +27,8 @@ const getStyles = stylesFactory(() => {
   };
 });
 
-export interface Props  {
-}
-class UnthemedDashNavTimeControls extends Component<Props> {
+
+class UnthemedDashNavTimeControls extends Component<any> {
   componentDidMount() {
     // Only reason for this is that sometimes time updates can happen via redux location changes
     // and this happens before timeSrv has had chance to update state (as it listens to angular route-updated)
@@ -69,6 +69,7 @@ class UnthemedDashNavTimeControls extends Component<Props> {
   };
 
   onChangeTimePicker = (timeRange: TimeRange) => {
+    const {history,location} = this.props
     const adjustedFrom = dateMath.isMathString(timeRange.raw.from) ? timeRange.raw.from : timeRange.from;
     const adjustedTo = dateMath.isMathString(timeRange.raw.to) ? timeRange.raw.to : timeRange.to;
     const nextRange = {
@@ -76,7 +77,9 @@ class UnthemedDashNavTimeControls extends Component<Props> {
       to:  adjustedTo,
     };
 
-    getTimeSrv().setTime(nextRange);
+    getTimeSrv().setTime(nextRange,{history,location});
+
+    this.forceUpdate();
   };
 
   onZoom = () => {
@@ -112,4 +115,4 @@ class UnthemedDashNavTimeControls extends Component<Props> {
   }
 }
 
-export const TimeControl = UnthemedDashNavTimeControls;
+export const TimePickerWrapper = withRouter(UnthemedDashNavTimeControls);

@@ -2,11 +2,11 @@
 import _ from 'lodash';
 // Utils
 import kbn from '../library/utils/kbn';
+import * as queryString from 'query-string'
 
 // Types
 import {
   dateMath,
-  DefaultTimeRange,
   TimeRange,
   RawTimeRange,
   TimeZone,
@@ -19,9 +19,12 @@ import { getZoomedTimeRange, getShiftedTimeRange } from '../library/utils/timePi
 
 import { config } from 'src/packages/datav-core';
 import {timer} from './timer'
+
+import { store } from 'src/store/store';
+import { updateStartDate,updateEndDate } from 'src/store/reducers/application';
+import {addParamsToUrl,getUrlParams} from 'src/core/library/utils/url'
 //@todo
 // 替换成真实的url参数
-const urlParams:any = {from: "now-1h", to: "now"}
 export class TimeSrv {
   time: any;
   refreshTimer: any;
@@ -32,24 +35,17 @@ export class TimeSrv {
 
 
   constructor() {
-    // default time
-    this.time = DefaultTimeRange.raw;
-
-
-    document.addEventListener('visibilitychange', () => {
-      if (this.autoRefreshBlocked && document.visibilityState === 'visible') {
-        this.autoRefreshBlocked = false;
-      }
-    });
-  }
-
-  init() {
     timer.cancelAll();
 
-    this.time = config.timePicker.time;
+    this.time = {
+      from : this.parseUrlParam(store.getState().application.startDate),
+      to: this.parseUrlParam(store.getState().application.endDate)
+    }
+
     this.refresh = config.timePicker.refresh;
 
     this.initTimeFromUrl();
+
     this.parseTime();
 
     // remember time at load so we can go back to it
@@ -58,8 +54,15 @@ export class TimeSrv {
     if (this.refresh) {
       this.setAutoRefresh(this.refresh);
     }
-  }
 
+    document.addEventListener('visibilitychange', () => {
+      if (this.autoRefreshBlocked && document.visibilityState === 'visible') {
+        this.autoRefreshBlocked = false;
+      }
+    });
+    
+  }
+  
   getValidIntervals(intervals: string[]): string[] {
     if (!contextSrv.minRefreshInterval) {
       return intervals;
@@ -125,11 +128,8 @@ export class TimeSrv {
   }
 
   private initTimeFromUrl() {
-    const params = urlParams;
-    if (params.time && params['time.window']) {
-      this.time = this.getTimeWindow(params.time, params['time.window']);
-    }
-
+    const params = getUrlParams()
+    
     if (params.from) {
       this.time.from = this.parseUrlParam(params.from) || this.time.from;
     }
@@ -169,7 +169,7 @@ export class TimeSrv {
 
     // update url inside timeout to so that a digest happens after (called from react)
      setTimeout(() => {
-      const params = urlParams;
+      const params = getUrlParams()
       if (interval) {
         params.refresh = contextSrv.getValidInterval(interval);
         //@todo
@@ -203,7 +203,7 @@ export class TimeSrv {
     timer.cancel(this.refreshTimer);
   }
 
-  setTime(time: RawTimeRange, fromRouteUpdate?: boolean) {
+  setTime(time: RawTimeRange, router?: any) {
     _.extend(this.time, time);
 
     // disable refresh if zoom in or zoom out
@@ -215,30 +215,31 @@ export class TimeSrv {
       this.oldRefresh = null;
     }
 
-    // update url
-    if (fromRouteUpdate !== true) {
-      const urlRange = this.timeRangeForUrl();
-      const params = urlParams;
-      params.from = urlRange.from;
-      params.to = urlRange.to;
-      //@todo
-      // 更新url
+    // update url params
+    if (router) {
+      const {history,location} = router
+      addParamsToUrl(history,location)
+    } 
 
-    }
-
-    setTimeout(()=>{}, 0);
+    // save timerange to store
+    const from = isDateTime(this.time.from) ? this.time.from.valueOf().toString() : this.time.from
+    const to = isDateTime(this.time.to) ? this.time.to.valueOf().toString() : this.time.to
+    
+    store.dispatch(updateStartDate(from))
+    store.dispatch(updateEndDate(to))
   }
   
+
+
   timeRangeForUrl = () => {
     const range = this.timeRange().raw;
-
+    
     if (isDateTime(range.from)) {
       range.from = range.from.valueOf().toString();
     }
     if (isDateTime(range.to)) {
       range.to = range.to.valueOf().toString();
-    }
-
+    } 
     return range;
   };
 

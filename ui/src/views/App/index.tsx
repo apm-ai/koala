@@ -29,20 +29,64 @@ import ConfigProvider from './ConfigProvider'
 
 import darkVars from 'src/styles/dark.json';
 import lightVars from 'src/styles/light.json';
-import {StoreState} from 'src/types'  
+import { StoreState } from 'src/types'
 
+import { setDataSourceService, setBackendSrv } from 'src/packages/datav-core'
+import { DatasourceSrv, getDatasourceSrv } from 'src/core/services/datasource'
+import { backendSrv } from 'src/core/services/backend'
+
+import { message } from 'antd';
+import { TimeSrv, setTimeSrv } from 'src/core/services/time';
 interface Props {
   theme: string
 }
 
-const UIApp = (props:Props) => {
+const UIApp = (props: Props) => {
   const { theme } = props
-  
+
   useEffect(() => {
     let vars = theme === "light" ? lightVars : darkVars;
-    const newVars = { ...vars , "a": "b"}
+    const newVars = { ...vars, "a": "b" }
     window.less.modifyVars(newVars)
   }, [theme])
+
+  // init datasource service
+  initDatasourceService()
+
+  // init backend service
+  initBackendService()
+
+  // init time service
+  initTimeService()
+
+
+
+  function initDatasourceService() {
+    const ds = new DatasourceSrv()
+    setDataSourceService(ds);
+
+    testLoadDatasource()
+  }
+
+
+  async function testLoadDatasource() {
+    try {
+      const ds = await getDatasourceSrv().get('Prometheus');
+      console.log("load prometheus ok:", ds)
+    } catch (error) {
+      message.error(error.message)
+    }
+  }
+
+  function initBackendService() {
+    setBackendSrv(backendSrv)
+  }
+
+
+  function initTimeService() {
+    const ds = new TimeSrv()
+    setTimeSrv(ds);
+  }
 
   return (
     <Intl>
@@ -59,7 +103,7 @@ const UIApp = (props:Props) => {
   );
 }
 
-export const mapStateToProps = (state:StoreState) => ({
+export const mapStateToProps = (state: StoreState) => ({
   theme: state.application.theme
 });
 

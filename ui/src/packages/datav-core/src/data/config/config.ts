@@ -6,8 +6,8 @@ export const defaultConfig: DatavConfig = {
     panel: { newTitle: 'Panel Title' },
     dashboard: { newTitle: 'New Dashboard Copy' },
     application: {
-        startDate: () => moment().subtract(1, 'h'),
-        endDate: () => moment(),
+        startDate: () => 'now-3h',
+        endDate: () => 'now',
         theme: 'light',
         locale: 'en_US'
     },
