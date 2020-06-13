@@ -1,7 +1,10 @@
 import * as AppEvents from './appEvents';
-// import { AppEvent } from './appEvents';
 import * as PanelEvents from './panelEvents';
-
+ 
+export type AppEvent<T>  = {
+    readonly name: string;
+    payload?: T;
+  }
 export { AppEvents };
 export { PanelEvents };
 

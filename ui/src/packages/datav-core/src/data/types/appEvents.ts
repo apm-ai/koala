@@ -1,6 +1,6 @@
 
 
-export interface AppEvent<T> {
+export type AppEvent<T>  = {
   readonly name: string;
   payload?: T;
 }

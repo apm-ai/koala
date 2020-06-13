@@ -72,7 +72,8 @@
     "emotion": "10.0.27",
     "react-calendar": "2.19.2",
     "react-use": "13.27.0",
-    "history": "^4.6.3"
+    "history": "^4.6.3",
+    "react-sizeme": "2.6.12"
   },
   "devDependencies": {
     "@types/history": "^4.7.2",
