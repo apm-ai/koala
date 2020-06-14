@@ -23,7 +23,7 @@
     "emotion": "10.0.27",
     "global": "^4.3.2",
     "history": "^4.6.3",
-    "jquery": "3.4.1",
+    "jquery": "3.5.0",
     "js-cookie": "^2.2.1",
     "less": "^3.11.1",
     "less-loader": "^5.0.0",
