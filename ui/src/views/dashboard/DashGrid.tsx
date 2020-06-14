@@ -2,9 +2,10 @@ import React, { PureComponent } from 'react';
 import ReactGridLayout, { ItemCallback } from 'react-grid-layout';
 import sizeMe from 'react-sizeme';
 import classNames from 'classnames';
-import {PanelModel} from './state/PanelModel'
-import {DashboardModel} from './state/DashboardModel'
+import {PanelModel} from './model/PanelModel'
+import {DashboardModel} from './model/DashboardModel'
 import { GRID_CELL_HEIGHT, GRID_CELL_VMARGIN, GRID_COLUMN_COUNT } from 'src/core/constants';
+import {PanelWrapper} from './PanelWrapper'
 
 interface GridWrapperProps {
     size: { width: number };
@@ -240,14 +241,13 @@ export class DashboardGrid extends PureComponent<Props> {
     //   }
   
       return (
-          <div></div>
-        // <DashboardPanel
-        //   panel={panel}
-        //   dashboard={this.props.dashboard}
-        //   isEditing={panel.isEditing}
-        //   isViewing={panel.isViewing}
-        //   isInView={panel.isInView}
-        // />
+        <PanelWrapper
+          panel={panel}
+          dashboard={this.props.dashboard}
+          isEditing={panel.isEditing}
+          isViewing={panel.isViewing}
+          isInView={panel.isInView}
+        />
       );
     }
   

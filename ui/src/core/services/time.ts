@@ -55,7 +55,6 @@ export class TimeSrv {
       this.setAutoRefresh(this.refresh);
     }
 
-    console.log('init refresh',this.refresh)
     document.addEventListener('visibilitychange', () => {
       if (this.autoRefreshBlocked && document.visibilityState === 'visible') {
         this.autoRefreshBlocked = false;

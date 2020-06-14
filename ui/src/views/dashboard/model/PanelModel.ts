@@ -49,9 +49,8 @@ export class PanelModel {
     events: Emitter;
     hasRefreshed: boolean;
     isInView: boolean;
-
+    
     constructor(model: any) {
-        console.log(model)
         this.events = new Emitter();
         this.restoreModel(model);
         this.replaceVariables = this.replaceVariables.bind(this);

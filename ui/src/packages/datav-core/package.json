@@ -20,7 +20,8 @@
     "lodash": "^4.17.15",
     "xss": "1.0.6",
     "systemjs": "0.20.19",
-    "systemjs-plugin-css": "0.1.37"
+    "systemjs-plugin-css": "0.1.37",
+    "bizcharts": "^3.5.8"
   },
   "devDependencies": {
     "@types/papaparse": "4.5.9",

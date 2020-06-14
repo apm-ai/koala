@@ -139,9 +139,6 @@ export class GrafanaPlugin<T extends PluginMeta = PluginMeta> {
   // This is set if the plugin system had errors loading the plugin
   loadError?: boolean;
 
-  // Config control (app/datasource)
-  angularConfigCtrl?: any;
-
   // Show configuration tabs on the plugin page
   configPages?: Array<PluginConfigPage<T>>;
 

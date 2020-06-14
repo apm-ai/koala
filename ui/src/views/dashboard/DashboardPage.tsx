@@ -1,7 +1,7 @@
 import React from 'react';
-import { DashboardModel } from './state/DashboardModel'
+import { DashboardModel } from './model/DashboardModel'
 import { CustomScrollbar } from 'src/views/components/CustomScrollbar'
-import {dashboardMock} from './state/mocks'
+import {dashboardMock} from './model/mocks'
 import {DashboardGrid} from './DashGrid'
 interface Props {
 }

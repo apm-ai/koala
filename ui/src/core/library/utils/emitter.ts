@@ -17,6 +17,7 @@ export class Emitter {
    * Emits an `event` with `payload`.
    */
   emit<T extends undefined>(event: AppEvent<T>): void;
+  //@ts-ignore
   emit<T extends Partial<T> extends T ? Partial<T> : never>(event: AppEvent<T>): void;
   emit<T>(event: AppEvent<T>, payload: T): void;
   emit<T>(event: AppEvent<T> | string, payload?: T | any): void {
@@ -37,6 +38,7 @@ export class Emitter {
    * Handles `event` with `handler()` when emitted.
    */
   on<T extends undefined>(event: AppEvent<T>, handler: () => void, scope?: any): void;
+  //@ts-ignore
   on<T extends Partial<T> extends T ? Partial<T> : never>(event: AppEvent<T>, handler: () => void, scope?: any): void;
   on<T>(event: AppEvent<T>, handler: (payload: T) => void, scope?: any): void;
   on<T>(event: AppEvent<T> | string, handler: (payload?: T | any) => void, scope?: any) {
@@ -69,6 +71,7 @@ export class Emitter {
   off(name: string, handler: (payload?: any) => void): void;
 
   off<T extends undefined>(event: AppEvent<T>, handler: () => void): void;
+  //@ts-ignore
   off<T extends Partial<T> extends T ? Partial<T> : never>(event: AppEvent<T>, handler: () => void, scope?: any): void;
   off<T>(event: AppEvent<T>, handler: (payload: T) => void): void;
   off<T>(event: AppEvent<T> | string, handler: (payload?: T | any) => void) {

@@ -1,6 +1,6 @@
 
 
-export type AppEvent<T>  = {
+ type AppEvent<T>  = {
   readonly name: string;
   payload?: T;
 }

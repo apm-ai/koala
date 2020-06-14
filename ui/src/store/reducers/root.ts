@@ -1,11 +1,13 @@
 import { AnyAction, combineReducers } from 'redux';
 import applicationReducers from './application'
 import userReducers from './user'
+import pluginsReducer from './plugins'
 import { CleanUp, cleanUpAction } from '../actions/cleanUp';
 
 const rootReducers = {
     ...applicationReducers,
-    ...userReducers
+    ...userReducers,
+    ...pluginsReducer
 };
 
 

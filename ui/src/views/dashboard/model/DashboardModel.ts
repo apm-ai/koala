@@ -1,6 +1,7 @@
 import { PanelModel } from './PanelModel'
 import { Emitter } from 'src/core/library/utils/emitter'
 import { AppEvent } from 'src/packages/datav-core'
+import {DashboardMeta} from 'src/types'
 
 export class DashboardModel {
     id: any;
@@ -11,7 +12,7 @@ export class DashboardModel {
     events: Emitter;
     panelInEdit?: PanelModel;
     panelInView: PanelModel;
-    meta : any;
+    meta: DashboardMeta;
     constructor(data: any) {
         if (!data) {
             data = {}
@@ -24,7 +25,7 @@ export class DashboardModel {
         this.panels = data.panels || []
         this.events = new Emitter();
         this.meta = {
-            canEdit : true
+            canEdit: true
         }
     }
 
@@ -48,6 +49,10 @@ export class DashboardModel {
 
     otherPanelInFullscreen(panel: PanelModel) {
         return (this.panelInEdit || this.panelInView) && !(panel.isViewing || panel.isEditing);
-      }
+    }
+
+    setPanelFocus(id: number) {
+        this.meta.focusPanelId = id;
+    }
 }
 

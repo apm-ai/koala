@@ -47,10 +47,6 @@ export class DataSourcePlugin<
     return this;
   }
 
-  setConfigCtrl(ConfigCtrl: any) {
-    this.angularConfigCtrl = ConfigCtrl;
-    return this;
-  }
 
   setQueryCtrl(QueryCtrl: any) {
     this.components.QueryCtrl = QueryCtrl;
@@ -98,8 +94,6 @@ export class DataSourcePlugin<
   }
 
   setComponentsFromLegacyExports(pluginExports: any) {
-    this.angularConfigCtrl = pluginExports.ConfigCtrl;
-
     this.components.QueryCtrl = pluginExports.QueryCtrl;
     this.components.AnnotationsQueryCtrl = pluginExports.AnnotationsQueryCtrl;
     this.components.ExploreQueryField = pluginExports.ExploreQueryField;

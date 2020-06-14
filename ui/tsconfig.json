@@ -18,8 +18,8 @@
     "noEmit": true,
     "jsx": "react",
     "experimentalDecorators": true,
-    "isolatedModules": true,
-    "strict": false
+    "strict": false,
+    "isolatedModules": true
   },
   "include": [
     "src",
